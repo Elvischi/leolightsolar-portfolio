@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Colour tokens: light by default, dark when the device prefers it */
+:root {
+  --bg: #f6f4ee;
+  --surface: #ffffff;
+  --text: #16140f;
+  --muted: #6b665a;
+  --line: #dedad0;
+  --accent: #d98a00;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141411;
+    --text: #f3f1ea;
+    --muted: #9a968a;
+    --line: #26241e;
+    --accent: #f5b301;
+    color-scheme: dark;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+}
+body {
+  @apply bg-bg text-ink font-sans m-0;
+}
+
+@layer components {
+  /* Solar-panel grid texture */
+  .panels {
+    background-color: color-mix(in srgb, var(--accent) 14%, var(--surface));
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+  /* Sun glow */
+  .sun {
+    background: radial-gradient(circle, var(--accent) 0%, color-mix(in srgb, var(--accent) 35%, transparent) 38%, transparent 70%);
+  }
+  .fade-in {
+    animation: fadeIn 0.9s ease both;
+  }
+}
+.hero-image {
+  background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=2400&q=90');
+  background-position: center 54%;
+  background-size: cover;
+}
+.hero-shade {
+  background:
+    linear-gradient(90deg, rgba(12, 31, 24, 0.9) 0%, rgba(12, 31, 24, 0.63) 48%, rgba(12, 31, 24, 0.14) 100%),
+    linear-gradient(0deg, rgba(12, 31, 24, 0.65) 0%, transparent 58%);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
